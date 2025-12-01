@@ -20,11 +20,11 @@ async def main():
     await queue.bind(ex, routing_key="payment.#")
     
     print("Listening for payment events (routing key: 'payment.#')...")
-        async with queue.iterator() as q:
-            async for msg in q:
-                async with msg.process():
-                    data = json.loads(msg.body)
-                    print("Payment Event:", msg.routing_key, data)
+    async with queue.iterator() as q:
+        async for msg in q:
+            async with msg.process():
+                data = json.loads(msg.body)
+                print("Payment Event:", msg.routing_key, data)
 
 if __name__ == "__main__":
-asyncio.run(main())
+    asyncio.run(main())
